@@ -1,0 +1,30 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 400,
+  "title": "Australia robery and assault stats",
+  "data": {
+    "url": "https://raw.githubusercontent.com/duytran1301/HOMEWORK10_FIT3179/main/robberystate.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.Type == 2 ? 'Robbery' : 'Assault'",
+      "as": "Crime Type"
+    },
+    {"filter": "datum.Year == 2020"}
+  ],
+  "mark": "bar",
+  "encoding": {
+    "y": {
+      "field": "Commit Number",
+      "type": "quantitative",
+      "aggregate": "mean",
+      "title": "Case Number",
+      "axis": {"grid": true}
+    },
+    "x": {"field": "State", "type": "nominal", "title": "State"},
+    "xOffset": {"field": "Type"},
+    "color": {"field": "Type", "title": "Crime Type"}
+  },
+  "config": {"view": {"stroke": "teal"}, "axis": {"domainWidth": 1}}
+}
